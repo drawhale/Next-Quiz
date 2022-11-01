@@ -10,7 +10,7 @@ export const getQuiz = async (params: RequestParams) => {
     const response = await axios.get(
       `https://opentdb.com/api.php?amount=${[params.amount]}&difficulty=${
         params.difficulty
-      }&type=multiple`
+      }&type=multiple&encode=base64`
     );
     return response.data.results;
   } catch (error) {

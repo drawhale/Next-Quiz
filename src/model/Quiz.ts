@@ -1,4 +1,4 @@
-import { shuffle } from "utils";
+import { shuffle, decodeString } from "utils";
 
 export type QuizDifficulty = "Easy" | "Medium" | "Hard";
 
@@ -19,13 +19,16 @@ export class QuizItem {
   constructor(
     category: string,
     question: string,
-    incorrect_answers: string[],
-    correct_answer: string
+    correct_answer: string,
+    incorrect_answers: string[]
   ) {
-    this.category = category;
-    this.question = question.replace(/&quot;/gi, '"');
-    this.incorrect_answers = shuffle([...incorrect_answers, correct_answer]);
-    this.correct_answer = correct_answer;
+    this.category = decodeString(category);
+    this.question = decodeString(question);
+    this.correct_answer = decodeString(correct_answer);
+    this.incorrect_answers = shuffle([
+      ...incorrect_answers.map((answer) => decodeString(answer)),
+      this.correct_answer,
+    ]);
   }
 }
 

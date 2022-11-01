@@ -40,8 +40,8 @@ export const QuizContextProvider: FC<Props> = ({ children }) => {
         new QuizItem(
           value.category,
           value.question,
-          value.incorrect_answers,
-          value.correct_answer
+          value.correct_answer,
+          value.incorrect_answers
         )
     );
 

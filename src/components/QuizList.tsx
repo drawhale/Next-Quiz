@@ -10,6 +10,7 @@ import type { FC } from "react";
 const QuizList: FC = () => {
   const { quiz } = useQuizContext();
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [showNextButton, setShowNextButton] = useState(false);
 
   const quizItem = quiz.items[questionIndex];
 
@@ -20,11 +21,12 @@ const QuizList: FC = () => {
           <QuestionCard
             question={quizItem.question}
             answers={quizItem.incorrect_answers}
-            onSelectAnswer={() => {}}
+            correctAnswer={quizItem.correct_answer}
+            onSelectAnswer={() => setShowNextButton(true)}
           />
         </ListItem>
       </ListWrapper>
-      <Button visible={true} onClick={() => {}}>
+      <Button visible={showNextButton} onClick={() => {}}>
         다음 문항
       </Button>
     </Wrapper>

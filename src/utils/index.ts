@@ -3,3 +3,7 @@ export const shuffle = (array: string[]) => {
   newArray.sort(() => Math.random() - 0.5);
   return newArray;
 };
+
+export const decodeString = (encodedString: string) => {
+  return window.atob(encodedString);
+};

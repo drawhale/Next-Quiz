@@ -1,16 +1,18 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { getQuiz } from "api/quiz";
-import { QUIZ_QUEISTION_AMOUNT } from "model/Quiz";
+import { Quiz, QuizItem, QUIZ_QUEISTION_AMOUNT } from "model/Quiz";
 
 import type { FC, ReactNode } from "react";
 import type { QuizStatus, QuizStartOptions } from "model/Quiz";
 
 type QuizContextValue = {
+  quiz: Quiz;
   status: QuizStatus;
   onStartQuiz: (options: QuizStartOptions) => void;
 };
 
 const initialQuizContextValue: QuizContextValue = {
+  quiz: new Quiz([]),
   status: "start",
   onStartQuiz: () => {},
 };
@@ -22,19 +24,28 @@ type Props = {
 };
 
 export const QuizContextProvider: FC<Props> = ({ children }) => {
+  const [quiz, setQuiz] = useState<Quiz>(new Quiz([]));
   const [status, setStatus] = useState<QuizStatus>("start");
 
   const startQuiz = async (options: QuizStartOptions) => {
-    setStatus("inprogress");
-    const quizData = await getQuiz({
+    setStatus("prepare");
+
+    const quizDatas = await getQuiz({
       amount: QUIZ_QUEISTION_AMOUNT,
       difficulty: options.difficulty.toLowerCase(),
     });
 
-    console.log(quizData);
+    const quizItems: QuizItem[] = quizDatas.map(
+      (value: any) => value as QuizItem
+    );
+
+    const quiz = new Quiz(quizItems);
+    setQuiz(quiz);
+    setStatus("inprogress");
   };
 
   const contextValue: QuizContextValue = {
+    quiz,
     status,
     onStartQuiz: startQuiz,
   };

@@ -12,7 +12,7 @@ export const getQuiz = async (params: RequestParams) => {
         params.difficulty
       }&type=multiple`
     );
-    return response.data;
+    return response.data.results;
   } catch (error) {
     console.error("get quiz api error: ", error);
     return [];

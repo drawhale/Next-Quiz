@@ -2,10 +2,13 @@ import { useState } from "react";
 import styled from "styled-components";
 import Button from "components/common/Button";
 import QuestionCard from "components/common/QuestionCard";
+import { useQuizContext } from "context/QuizContext";
+import { QUIZ_DIFFICULTYS } from "model/Quiz";
 
 import type { FC } from "react";
 
-const QuizMain: FC = () => {
+const QuizStart: FC = () => {
+  const quizContext = useQuizContext();
   const [step, setStep] = useState(1);
 
   return (
@@ -24,7 +27,12 @@ const QuizMain: FC = () => {
           </Description>
           <QuestionCard
             question="퀴즈의 난이도를 선택해주세요."
-            answers={["EASY", "NORMAL", "HARD"]}
+            answers={QUIZ_DIFFICULTYS}
+            onSelectAnswer={(answer) =>
+              quizContext.onStartQuiz({
+                difficulty: answer as typeof QUIZ_DIFFICULTYS[number],
+              })
+            }
           />
           <Button>선택 하기</Button>
         </Step2Wrapper>
@@ -33,7 +41,7 @@ const QuizMain: FC = () => {
   );
 };
 
-export default QuizMain;
+export default QuizStart;
 
 const Wrapper = styled.div`
   flex: 1;

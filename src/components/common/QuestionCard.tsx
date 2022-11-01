@@ -6,9 +6,10 @@ import type { FC } from "react";
 type Props = {
   question: string;
   answers: string[];
+  onSelectAnswer: (answer: string) => void;
 };
 
-const QuestionCard: FC<Props> = ({ question, answers }) => {
+const QuestionCard: FC<Props> = ({ question, answers, onSelectAnswer }) => {
   return (
     <Card>
       <Description>QUESTION</Description>
@@ -16,7 +17,7 @@ const QuestionCard: FC<Props> = ({ question, answers }) => {
       <Description>ANSWER</Description>
       <AnswerWrapper>
         {answers.map((answer) => (
-          <Answer>{answer}</Answer>
+          <Answer onClick={() => onSelectAnswer(answer)}>{answer}</Answer>
         ))}
       </AnswerWrapper>
     </Card>

@@ -1,14 +1,11 @@
-import QuizTemplate from "components/QuizTemplate";
-import QuizHeader from "components/QuizHeader";
-import QuizMain from "components/QuizMain";
-import QuizList from "components/QuizList";
+import { QuizContextProvider } from "context/QuizContext";
+import QuizMain from "pages/QuizMain";
 
 function App() {
   return (
-    <QuizTemplate
-      headerComponent={<QuizHeader />}
-      contentComponent={<QuizMain />}
-    />
+    <QuizContextProvider>
+      <QuizMain />
+    </QuizContextProvider>
   );
 }
 

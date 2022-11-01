@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { scaleUp } from "components/common/styleVariables";
 
 import type { FC, ReactNode } from "react";
 
@@ -46,19 +47,11 @@ const StyledButton = styled.button`
   filter: drop-shadow(1px 1px 6px #00000055);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  animation: scaleUp 0.1s ease-in-out;
 
   &:hover,
   &:active {
     background-color: #00b386;
   }
 
-  @keyframes scaleUp {
-    from {
-      transform: scale(0);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
+  ${scaleUp};
 `;

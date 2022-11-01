@@ -27,6 +27,7 @@ const QuestionCard: FC<Props> = ({ question, answers, onSelectAnswer }) => {
       <AnswerWrapper>
         {answers.map((answer) => (
           <Answer
+            key={answer}
             $selected={selectedAnswer === answer}
             onClick={() => handleAnswerClick(answer)}
           >

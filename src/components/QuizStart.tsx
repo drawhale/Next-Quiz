@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { slideIn } from "components/common/styleVariables";
 import Button from "components/common/Button";
 import QuestionCard from "components/common/QuestionCard";
 import { useQuizContext } from "context/QuizContext";
@@ -76,16 +77,7 @@ const Step2Wrapper = styled.div`
   align-items: center;
   gap: 30px;
 
-  animation: slideIn 0.3s ease-in-out;
-
-  @keyframes slideIn {
-    from {
-      transform: translate3d(100vw, 0, 0);
-    }
-    to {
-      transform: translate3d(0, 0, 0);
-    }
-  }
+  ${slideIn};
 `;
 
 const Description = styled.p`

@@ -55,7 +55,7 @@ const QuizStart: FC = () => {
 
 export default QuizStart;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   flex: 1;
   padding: 20px;
   box-sizing: border-box;

@@ -89,7 +89,7 @@ const Question = styled.div`
 const AnswerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 `;
 
 const Answer = styled.div<{ $selected: boolean; $correct?: boolean }>`
@@ -104,6 +104,7 @@ const Answer = styled.div<{ $selected: boolean; $correct?: boolean }>`
   font-size: 2rem;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  border: 5px solid #ffffff;
 
   &:hover {
     background-color: #eeeeee;

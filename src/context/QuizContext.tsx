@@ -9,12 +9,14 @@ type QuizContextValue = {
   quiz: Quiz;
   status: QuizStatus;
   onStartQuiz: (options: QuizStartOptions) => void;
+  onDoneQuiz: () => void;
 };
 
 const initialQuizContextValue: QuizContextValue = {
   quiz: new Quiz([]),
   status: "start",
   onStartQuiz: () => {},
+  onDoneQuiz: () => {},
 };
 
 const QuizContext = createContext(initialQuizContextValue);
@@ -50,10 +52,15 @@ export const QuizContextProvider: FC<Props> = ({ children }) => {
     setStatus("inprogress");
   };
 
+  const doneQuiz = () => {
+    setStatus("done");
+  };
+
   const contextValue: QuizContextValue = {
     quiz,
     status,
     onStartQuiz: startQuiz,
+    onDoneQuiz: doneQuiz,
   };
 
   return (

@@ -36,13 +36,35 @@ export class Quiz {
   public items: QuizItem[];
 
   private _start_timestamp: number;
+  private _current_question_index: number;
   private _correct_answer_indexs: number[];
   private _incorrect_answer_indexs: number[];
 
   constructor(items: QuizItem[]) {
     this.items = items;
     this._start_timestamp = Date.now();
+    this._current_question_index = 0;
     this._correct_answer_indexs = [];
     this._incorrect_answer_indexs = [];
   }
+
+  public solveQuestion(questionIndex: number, selectedAnswer: string) {
+    const isCorrect =
+      this.items[questionIndex].correct_answer === selectedAnswer;
+
+    (isCorrect
+      ? this._correct_answer_indexs
+      : this._incorrect_answer_indexs
+    ).push(questionIndex);
+
+    return isCorrect;
+  }
+
+  public getNextQuestionIndex = () => {
+    this._current_question_index = Math.min(
+      this._current_question_index + 1,
+      this.items.length - 1
+    );
+    return this._current_question_index;
+  };
 }

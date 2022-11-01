@@ -73,7 +73,6 @@ export class Quiz {
   }
 
   get incorrectAnswerCount() {
-    console.log("get", this._incorrect_answer_indexs);
     return this._incorrect_answer_indexs.length;
   }
 

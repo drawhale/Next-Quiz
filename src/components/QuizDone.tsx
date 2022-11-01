@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import { useQuizContext } from "context/QuizContext";
 import Button from "components/common/Button";
+import CircleChart from "components/common/CircleChart";
+import { QUIZ_QUEISTION_AMOUNT } from "model/Quiz";
 
 import type { FC } from "react";
 
 const QuizDone: FC = () => {
   const quizContext = useQuizContext();
   const { quiz, onResetQuiz } = quizContext;
+
+  const correctAnswerRatio = Math.trunc(
+    (quiz.correctAnswerCount / QUIZ_QUEISTION_AMOUNT) * 100
+  );
 
   return (
     <Wrapper>
@@ -27,6 +33,7 @@ const QuizDone: FC = () => {
             <div>{quiz.incorrectAnswerCount}</div>
           </InfoWrapper>
         </AnswerCountWrapper>
+        <CircleChart value={correctAnswerRatio} />
       </div>
       <Button onClick={onResetQuiz}>다시 풀기</Button>
     </Wrapper>

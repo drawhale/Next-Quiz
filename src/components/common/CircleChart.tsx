@@ -12,7 +12,7 @@ const CircleChart: FC<Props> = ({ value }) => {
 
   useEffect(() => {
     setProgress(value);
-  }, []);
+  }, [value]);
 
   const radius = 120;
   const stroke = 14;

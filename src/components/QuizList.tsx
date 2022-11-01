@@ -106,7 +106,7 @@ const ListWrapper = styled.div`
 const ListItem = styled.div`
   width: 100%;
   opacity: 1;
-  transition: transform 0.3s ease-in-out, opacity 0.2s;
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
 
   ${slideIn};
 `;

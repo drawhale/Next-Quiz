@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
-import Card from "./Card";
+import Card from "components/common/Card";
+import CheckIcon from "components/common/CheckIcon";
 
 import type { FC } from "react";
 
@@ -10,6 +12,13 @@ type Props = {
 };
 
 const QuestionCard: FC<Props> = ({ question, answers, onSelectAnswer }) => {
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
+  const handleAnswerClick = (answer: string) => {
+    setSelectedAnswer(answer);
+    onSelectAnswer(answer);
+  };
+
   return (
     <Card>
       <Description>QUESTION</Description>
@@ -17,7 +26,13 @@ const QuestionCard: FC<Props> = ({ question, answers, onSelectAnswer }) => {
       <Description>ANSWER</Description>
       <AnswerWrapper>
         {answers.map((answer) => (
-          <Answer onClick={() => onSelectAnswer(answer)}>{answer}</Answer>
+          <Answer
+            $selected={selectedAnswer === answer}
+            onClick={() => handleAnswerClick(answer)}
+          >
+            <span>{answer}</span>
+            {selectedAnswer === answer && <CheckIcon />}
+          </Answer>
         ))}
       </AnswerWrapper>
     </Card>
@@ -44,16 +59,21 @@ const AnswerWrapper = styled.div`
   gap: 10px;
 `;
 
-const Answer = styled.div`
+const Answer = styled.div<{ $selected: boolean }>`
   width: 100%;
   padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
   background-color: #f5f5f5;
   border-radius: 3rem;
   font-size: 2rem;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background-color: #eeeeee;
   }
+
+  ${(props) => props.$selected && `font-weight: bold;`}
 `;

@@ -6,10 +6,23 @@ import { useQuizContext } from "context/QuizContext";
 import { QUIZ_DIFFICULTYS } from "model/Quiz";
 
 import type { FC } from "react";
+import type { QuizDifficulty } from "model/Quiz";
 
 const QuizStart: FC = () => {
   const quizContext = useQuizContext();
+
   const [step, setStep] = useState(1);
+  const [difficulty, setDifficulty] = useState<QuizDifficulty | null>(null);
+
+  const handleSelectClick = () => {
+    if (!difficulty) {
+      return;
+    }
+
+    quizContext.onStartQuiz({
+      difficulty,
+    });
+  };
 
   return (
     <Wrapper>
@@ -28,13 +41,11 @@ const QuizStart: FC = () => {
           <QuestionCard
             question="퀴즈의 난이도를 선택해주세요."
             answers={QUIZ_DIFFICULTYS}
-            onSelectAnswer={(answer) =>
-              quizContext.onStartQuiz({
-                difficulty: answer as typeof QUIZ_DIFFICULTYS[number],
-              })
-            }
+            onSelectAnswer={(answer) => setDifficulty(answer as QuizDifficulty)}
           />
-          <Button>선택 하기</Button>
+          <Button visible={difficulty !== null} onClick={handleSelectClick}>
+            시작하기
+          </Button>
         </Step2Wrapper>
       )}
     </Wrapper>

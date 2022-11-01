@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState, useContext } from "react";
+import { getQuiz } from "api/quiz";
+import { QUIZ_QUEISTION_AMOUNT } from "model/Quiz";
 
 import type { FC, ReactNode } from "react";
 import type { QuizStatus, QuizStartOptions } from "model/Quiz";
@@ -22,8 +24,14 @@ type Props = {
 export const QuizContextProvider: FC<Props> = ({ children }) => {
   const [status, setStatus] = useState<QuizStatus>("start");
 
-  const startQuiz = (options: QuizStartOptions) => {
+  const startQuiz = async (options: QuizStartOptions) => {
     setStatus("inprogress");
+    const quizData = await getQuiz({
+      amount: QUIZ_QUEISTION_AMOUNT,
+      difficulty: options.difficulty.toLowerCase(),
+    });
+
+    console.log(quizData);
   };
 
   const contextValue: QuizContextValue = {

@@ -1,4 +1,4 @@
-import { shuffle, decodeString } from "utils";
+import { shuffle, decodeString, convertTimeStampToTime } from "utils";
 
 export type QuizDifficulty = "Easy" | "Medium" | "Hard";
 
@@ -36,6 +36,8 @@ export class Quiz {
   public items: QuizItem[];
 
   private _start_timestamp: number;
+  private _done_timestamp: number | null;
+
   private _current_question_index: number;
   private _correct_answer_indexs: number[];
   private _incorrect_answer_indexs: number[];
@@ -43,9 +45,36 @@ export class Quiz {
   constructor(items: QuizItem[]) {
     this.items = items;
     this._start_timestamp = Date.now();
+    this._done_timestamp = null;
+
     this._current_question_index = 0;
     this._correct_answer_indexs = [];
     this._incorrect_answer_indexs = [];
+  }
+
+  get nextQuestionIndex() {
+    this._current_question_index = Math.min(
+      this._current_question_index + 1,
+      this.items.length - 1
+    );
+    return this._current_question_index;
+  }
+
+  get recordTime() {
+    if (!this._done_timestamp) {
+      return "00:00:00";
+    }
+
+    return convertTimeStampToTime(this._start_timestamp, this._done_timestamp);
+  }
+
+  get correctAnswerCount() {
+    return this._correct_answer_indexs.length;
+  }
+
+  get incorrectAnswerCount() {
+    console.log("get", this._incorrect_answer_indexs);
+    return this._incorrect_answer_indexs.length;
   }
 
   public solveQuestion(questionIndex: number, selectedAnswer: string) {
@@ -60,11 +89,7 @@ export class Quiz {
     return isCorrect;
   }
 
-  public getNextQuestionIndex = () => {
-    this._current_question_index = Math.min(
-      this._current_question_index + 1,
-      this.items.length - 1
-    );
-    return this._current_question_index;
+  public done = () => {
+    this._done_timestamp = Date.now();
   };
 }

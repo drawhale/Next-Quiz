@@ -53,6 +53,7 @@ export const QuizContextProvider: FC<Props> = ({ children }) => {
   };
 
   const doneQuiz = () => {
+    quiz.done();
     setStatus("done");
   };
 

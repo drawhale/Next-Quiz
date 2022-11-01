@@ -5,6 +5,7 @@ import QuizHeader from "components/QuizHeader";
 import QuizStart from "components/QuizStart";
 import QuizLoading from "components/QuizLoading";
 import QuizList from "components/QuizList";
+import QuizDone from "components/QuizDone";
 
 import type { FC, ReactNode } from "react";
 import type { QuizStatus } from "model/Quiz";
@@ -17,7 +18,7 @@ const QUIZ_PROCESS_COMPONENT: QuizComponentByStatus = {
   start: <QuizStart />,
   prepare: <QuizLoading />,
   inprogress: <QuizList />,
-  done: <h1>Done</h1>,
+  done: <QuizDone />,
 };
 
 const QuizMain: FC = () => {
@@ -27,7 +28,6 @@ const QuizMain: FC = () => {
     <QuizTemplate
       headerComponent={<QuizHeader />}
       contentComponent={QUIZ_PROCESS_COMPONENT[quizContext.status]}
-      // contentComponent={<QuizLoading />}
     />
   );
 };

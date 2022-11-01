@@ -25,7 +25,7 @@ const QuizList: FC = () => {
 
   const handleNextClick = () => {
     const isCorrect = quiz.solveQuestion(questionIndex, selectedAnswer);
-    const nextQuestionIndex = quiz.getNextQuestionIndex();
+    const nextQuestionIndex = quiz.nextQuestionIndex;
 
     if (listItemRef.current) {
       // 문제를 맞춘 경우 카드를 왼쪽으로, 틀린 경우 위로 이동함
@@ -106,7 +106,7 @@ const ListWrapper = styled.div`
 const ListItem = styled.div`
   width: 100%;
   opacity: 1;
-  transition: transform 0.3s ease-in-out, opacity 0.15s;
+  transition: transform 0.3s ease-in-out, opacity 0.2s;
 
   ${slideIn};
 `;

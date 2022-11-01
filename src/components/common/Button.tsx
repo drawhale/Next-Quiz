@@ -5,10 +5,15 @@ import type { FC, ReactNode } from "react";
 type Props = {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 };
 
-const Button: FC<Props> = ({ children, className }) => {
-  return <Wrapper className={className}>{children}</Wrapper>;
+const Button: FC<Props> = ({ children, className, onClick }) => {
+  return (
+    <Wrapper className={className} onClick={onClick}>
+      {children}
+    </Wrapper>
+  );
 };
 
 export default Button;
@@ -23,4 +28,10 @@ const Wrapper = styled.button`
   border-radius: 3rem;
   filter: drop-shadow(1px 1px 6px #00000055);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover,
+  &:active {
+    background-color: #00b386;
+  }
 `;

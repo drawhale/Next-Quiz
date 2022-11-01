@@ -7,8 +7,7 @@ function App() {
   return (
     <QuizTemplate
       headerComponent={<QuizHeader />}
-      bodyComponent={<QuizMain />}
-      footerComopnent={<h1>footer</h1>}
+      contentComponent={<QuizMain />}
     />
   );
 }

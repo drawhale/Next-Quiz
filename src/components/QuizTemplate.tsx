@@ -4,30 +4,24 @@ import type { FC, ReactNode } from "react";
 
 type Props = {
   headerComponent: ReactNode;
-  bodyComponent: ReactNode;
-  footerComopnent: ReactNode;
+  contentComponent: ReactNode;
 };
 
-const Layout: FC<Props> = ({
-  headerComponent,
-  bodyComponent,
-  footerComopnent,
-}) => {
+const QuizTemplate: FC<Props> = ({ headerComponent, contentComponent }) => {
   return (
     <Wrapper>
       <Header>{headerComponent}</Header>
-      <Body>{bodyComponent}</Body>
-      <Footer>{footerComopnent}</Footer>
+      <Content>{contentComponent}</Content>
     </Wrapper>
   );
 };
 
-export default Layout;
+export default QuizTemplate;
 
 const Wrapper = styled.div`
   margin: 0 auto;
   min-width: 320px;
-  max-width: 960px;
+  max-width: 640px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,13 +32,8 @@ const Header = styled.header`
   height: 80px;
 `;
 
-const Body = styled.main`
+const Content = styled.main`
   flex: 1;
-`;
-
-const Footer = styled.footer`
-  height: 80px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
 `;

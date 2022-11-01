@@ -1,11 +1,34 @@
+import { useState } from "react";
 import styled from "styled-components";
+import Button from "components/common/Button";
+import QuestionCard from "components/common/QuestionCard";
 
 import type { FC } from "react";
 
 const QuizMain: FC = () => {
+  const [step, setStep] = useState(1);
+
   return (
     <Wrapper>
-      <Card>TEST</Card>
+      {step === 1 && (
+        <Step1Wrapper>
+          <Button onClick={() => setStep(2)}>퀴즈 풀기</Button>
+        </Step1Wrapper>
+      )}
+      {step === 2 && (
+        <Step2Wrapper>
+          <Description>
+            무작위로 선택된 카테고리로
+            <br />
+            10개의 문항을 풀게 됩니다.
+          </Description>
+          <QuestionCard
+            question="퀴즈의 난이도를 선택해주세요."
+            answers={["EASY", "NORMAL", "HARD"]}
+          />
+          <Button>선택 하기</Button>
+        </Step2Wrapper>
+      )}
     </Wrapper>
   );
 };
@@ -13,29 +36,42 @@ const QuizMain: FC = () => {
 export default QuizMain;
 
 const Wrapper = styled.div`
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+`;
+
+const Step1Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Step2Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+
+  animation: slideIn 0.3s ease-in-out;
+
+  @keyframes slideIn {
+    from {
+      transform: translate3d(100vw, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+`;
+
+const Description = styled.p`
   width: 100%;
-  height: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-`;
-
-const Card = styled.div`
-  padding: 20px;
-  box-sizing: border-box;
-  height: 100%;
-  background-color: #ffffff;
-  border-radius: 3rem;
-  filter: drop-shadow(1px 1px 6px #00000055);
-`;
-
-const StartButton = styled.button`
-  border: 0;
-  outline: 0;
-  padding: 1rem 4rem;
-  font-size: 2rem;
-  color: #ffffff;
-  background-color: #00c896;
-  border-radius: 3rem;
-  filter: drop-shadow(1px 1px 6px #00000055);
-  cursor: pointer;
+  font-size: 2.2rem;
+  line-height: 3rem;
+  text-align: center;
 `;

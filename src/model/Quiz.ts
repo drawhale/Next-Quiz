@@ -1,3 +1,5 @@
+import { shuffle } from "utils";
+
 export type QuizDifficulty = "Easy" | "Medium" | "Hard";
 
 export type QuizStatus = "start" | "prepare" | "inprogress" | "done";
@@ -13,6 +15,18 @@ export class QuizItem {
   public question: string;
   public incorrect_answers: string[];
   public correct_answer: string;
+
+  constructor(
+    category: string,
+    question: string,
+    incorrect_answers: string[],
+    correct_answer: string
+  ) {
+    this.category = category;
+    this.question = question.replace(/&quot;/gi, '"');
+    this.incorrect_answers = shuffle([...incorrect_answers, correct_answer]);
+    this.correct_answer = correct_answer;
+  }
 }
 
 export class Quiz {
@@ -25,5 +39,7 @@ export class Quiz {
   constructor(items: QuizItem[]) {
     this.items = items;
     this._start_timestamp = Date.now();
+    this._correct_answer_indexs = [];
+    this._incorrect_answer_indexs = [];
   }
 }

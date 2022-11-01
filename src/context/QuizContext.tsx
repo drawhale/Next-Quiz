@@ -36,7 +36,13 @@ export const QuizContextProvider: FC<Props> = ({ children }) => {
     });
 
     const quizItems: QuizItem[] = quizDatas.map(
-      (value: any) => value as QuizItem
+      (value: any) =>
+        new QuizItem(
+          value.category,
+          value.question,
+          value.incorrect_answers,
+          value.correct_answer
+        )
     );
 
     const quiz = new Quiz(quizItems);

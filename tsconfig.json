@@ -17,8 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "noErrorTruncation": true,
-    "useUnknownInCatchVariables": false,
-    "strictPropertyInitialization": false
+    "useUnknownInCatchVariables": false
   },
   "include": ["src"]
 }

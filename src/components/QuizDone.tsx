@@ -1,30 +1,34 @@
 import styled from "styled-components";
 import { useQuizContext } from "context/QuizContext";
+import Button from "components/common/Button";
 
 import type { FC } from "react";
 
 const QuizDone: FC = () => {
   const quizContext = useQuizContext();
-  const { quiz } = quizContext;
+  const { quiz, onResetQuiz } = quizContext;
 
   return (
     <Wrapper>
-      <InfoWrapper>
-        <div>소요된 시간</div>
-        <div>{quiz.recordTime}</div>
-      </InfoWrapper>
+      <div>
+        <InfoWrapper>
+          <div>소요된 시간</div>
+          <div>{quiz.recordTime}</div>
+        </InfoWrapper>
 
-      <AnswerCountWrapper>
-        <InfoWrapper>
-          <div>정답수</div>
-          <div>{quiz.correctAnswerCount}</div>
-        </InfoWrapper>
-        <Divider />
-        <InfoWrapper>
-          <div>오답수</div>
-          <div>{quiz.incorrectAnswerCount}</div>
-        </InfoWrapper>
-      </AnswerCountWrapper>
+        <AnswerCountWrapper>
+          <InfoWrapper>
+            <div>정답수</div>
+            <div>{quiz.correctAnswerCount}</div>
+          </InfoWrapper>
+          <Divider />
+          <InfoWrapper>
+            <div>오답수</div>
+            <div>{quiz.incorrectAnswerCount}</div>
+          </InfoWrapper>
+        </AnswerCountWrapper>
+      </div>
+      <Button onClick={onResetQuiz}>다시 풀기</Button>
     </Wrapper>
   );
 };
@@ -32,10 +36,12 @@ const QuizDone: FC = () => {
 export default QuizDone;
 
 const Wrapper = styled.section`
+  padding: 20px;
+  box-sizing: border-box;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 `;
 

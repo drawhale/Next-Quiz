@@ -92,4 +92,12 @@ export class Quiz {
   public done = () => {
     this._done_timestamp = Date.now();
   };
+
+  public reset = () => {
+    this._start_timestamp = Date.now();
+    this._done_timestamp = null;
+    this._current_question_index = 0;
+    this._correct_answer_indexs = [];
+    this._incorrect_answer_indexs = [];
+  };
 }

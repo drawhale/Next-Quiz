@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import type { FC } from "react";
 
 const LeftArrowIcon: FC = () => {

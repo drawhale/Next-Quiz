@@ -45,6 +45,12 @@ const QuizList: FC = () => {
       setQuestionIndex(nextQuestionIndex);
       setSelectedAnswer("");
       setShowNextButton(false);
+
+      document.dispatchEvent(
+        new CustomEvent("change_review_count", {
+          detail: { reviewCount: quiz.incorrectAnswerCount },
+        })
+      );
     }, ANIMATION_DELAY);
   };
 

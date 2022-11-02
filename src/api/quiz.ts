@@ -18,5 +18,3 @@ export const getQuiz = async (params: RequestParams) => {
     return [];
   }
 };
-
-export default {};

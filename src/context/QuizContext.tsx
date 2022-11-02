@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import { getQuiz } from "api/quiz";
 import { Quiz, QuizItem, QUIZ_QUEISTION_AMOUNT } from "model/Quiz";
 

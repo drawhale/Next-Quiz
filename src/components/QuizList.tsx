@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { slideIn } from "./common/styleVariables";
 import { useQuizContext } from "context/QuizContext";
@@ -13,10 +13,22 @@ const ANIMATION_DELAY = 200;
 const QuizList: FC = () => {
   const quizContext = useQuizContext();
   const { quiz, onDoneQuiz } = quizContext;
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(quiz.currentQuestionIndex);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showNextButton, setShowNextButton] = useState(false);
   const listItemRef = useRef<HTMLDivElement>(null);
+
+  const dispatchChangeReviewCountEvent = useCallback(() => {
+    document.dispatchEvent(
+      new CustomEvent("change_review_count", {
+        detail: { reviewCount: quiz.incorrectAnswerCount },
+      })
+    );
+  }, [quiz]);
+
+  useEffect(() => {
+    dispatchChangeReviewCountEvent();
+  }, [dispatchChangeReviewCountEvent]);
 
   const handleSelectAnswer = (answer: string) => {
     setSelectedAnswer(answer);
@@ -46,11 +58,7 @@ const QuizList: FC = () => {
       setSelectedAnswer("");
       setShowNextButton(false);
 
-      document.dispatchEvent(
-        new CustomEvent("change_review_count", {
-          detail: { reviewCount: quiz.incorrectAnswerCount },
-        })
-      );
+      dispatchChangeReviewCountEvent();
     }, ANIMATION_DELAY);
   };
 

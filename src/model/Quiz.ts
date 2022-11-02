@@ -56,6 +56,10 @@ export class Quiz {
     this._incorrect_answers = [];
   }
 
+  get currentQuestionIndex() {
+    return this._current_question_index;
+  }
+
   get nextQuestionIndex() {
     this._current_question_index = Math.min(
       this._current_question_index + 1,

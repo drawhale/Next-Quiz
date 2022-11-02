@@ -36,4 +36,5 @@ const Content = styled.main`
   flex: 1;
   display: flex;
   margin-bottom: 20px;
+  overflow: auto;
 `;

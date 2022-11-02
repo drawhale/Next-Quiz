@@ -49,7 +49,6 @@ const ListWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  overflow: auto;
 `;
 
 const EmptyWrapper = styled.div`

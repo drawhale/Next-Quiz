@@ -40,7 +40,11 @@ export class Quiz {
 
   private _current_question_index: number;
   private _correct_answer_indexs: number[];
-  private _incorrect_answer_indexs: number[];
+
+  private _incorrect_answers: {
+    questionIndex: number;
+    selectedAnswer: string;
+  }[];
 
   constructor(items: QuizItem[]) {
     this.items = items;
@@ -49,7 +53,7 @@ export class Quiz {
 
     this._current_question_index = 0;
     this._correct_answer_indexs = [];
-    this._incorrect_answer_indexs = [];
+    this._incorrect_answers = [];
   }
 
   get nextQuestionIndex() {
@@ -73,17 +77,25 @@ export class Quiz {
   }
 
   get incorrectAnswerCount() {
-    return this._incorrect_answer_indexs.length;
+    return this._incorrect_answers.length;
+  }
+
+  get incorrectQueistions() {
+    return this._incorrect_answers.map(({ questionIndex, selectedAnswer }) => ({
+      ...this.items[questionIndex],
+      selected_answer: selectedAnswer,
+    }));
   }
 
   public solveQuestion(questionIndex: number, selectedAnswer: string) {
     const isCorrect =
       this.items[questionIndex].correct_answer === selectedAnswer;
 
-    (isCorrect
-      ? this._correct_answer_indexs
-      : this._incorrect_answer_indexs
-    ).push(questionIndex);
+    if (isCorrect) {
+      this._correct_answer_indexs.push(questionIndex);
+    } else {
+      this._incorrect_answers.push({ questionIndex, selectedAnswer });
+    }
 
     return isCorrect;
   }
@@ -97,6 +109,6 @@ export class Quiz {
     this._done_timestamp = null;
     this._current_question_index = 0;
     this._correct_answer_indexs = [];
-    this._incorrect_answer_indexs = [];
+    this._incorrect_answers = [];
   };
 }

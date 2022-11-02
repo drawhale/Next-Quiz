@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useQuizContext } from "context/QuizContext";
 import QuizTemplate from "components/QuizTemplate";
 import QuizHeader from "components/QuizHeader";

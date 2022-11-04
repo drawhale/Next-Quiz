@@ -1,4 +1,9 @@
-import { convertTimeStampToTime, shuffle } from "utils";
+import {
+  convertTimeStampToTime,
+  shuffle,
+  encodeString,
+  decodeString,
+} from "utils";
 
 describe("utils", () => {
   test("shuffle(array) - should be equal length", () => {
@@ -13,5 +18,13 @@ describe("utils", () => {
 
     const result = convertTimeStampToTime(timestamp1, timestamp2);
     expect(result).toBe("01:02:31");
+  });
+
+  test("decode(encodedString) - should be equal encode(value)", () => {
+    const value = "TEST string";
+    const encodedString = encodeString(value);
+    const decodedString = decodeString(encodedString);
+
+    expect(decodedString).toBe(value);
   });
 });

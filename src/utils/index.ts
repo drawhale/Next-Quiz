@@ -4,6 +4,10 @@ export const shuffle = (array: string[]) => {
   return newArray;
 };
 
+export const encodeString = (value: string) => {
+  return window.btoa(value);
+};
+
 export const decodeString = (encodedString: string) => {
   return window.atob(encodedString);
 };

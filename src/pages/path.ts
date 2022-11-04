@@ -1,4 +1,4 @@
 export const ROUTE_PATH = {
-  QUIZ_MAIN: "/",
-  REVIEW_NOTE: "/note",
+  QUIZ_MAIN: "/quiz",
+  REVIEW_NOTE: "/quiz/note",
 };
